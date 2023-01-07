@@ -1,5 +1,7 @@
 .App {
   width: 25vh;
   margin: 0 auto;
+}
+.App > div {
   margin-top: 5vh;
 }
