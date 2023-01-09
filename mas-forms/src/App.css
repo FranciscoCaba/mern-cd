@@ -1,0 +1,15 @@
+#root {
+  margin: 3vh auto;
+  width: 30vw;
+}
+form div {
+  margin: 2vh 0;
+  padding: 1vh;
+  background-color: #f6f6f6;
+  border-radius: 10px;
+  border: 1px solid #dedede;
+}
+label {
+  color: #bbbbbb;
+  text-align: center;
+}
