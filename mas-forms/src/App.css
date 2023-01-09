@@ -4,6 +4,7 @@
 }
 form div {
   margin: 2vh 0;
+  margin-bottom: 0;
   padding: 1vh;
   background-color: #f6f6f6;
   border-radius: 10px;
