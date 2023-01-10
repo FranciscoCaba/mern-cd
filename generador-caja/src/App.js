@@ -3,13 +3,18 @@ import ColorInput from './components/ColorInput'
 import ColorBoxes from './components/ColorBoxes'
 import './App.css';
 
+
 function App() {
-  const [colores, setColores] = useState([])
+  const [state, setState] = useState([])
+  
+  function addProps(newProps){
+    setState([...state, newProps]);
+  }
 
   return (
     <div className="App">
-      <ColorInput />
-      <ColorBoxes />
+      <ColorInput addProps={addProps}/>
+      <ColorBoxes colorBoxStyle={state}/>
     </div>
   );
 }
