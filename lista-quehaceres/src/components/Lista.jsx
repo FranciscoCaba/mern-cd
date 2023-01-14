@@ -1,41 +1,47 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 const Lista = () => {
-    const [listaQuehacer, setListaQuehacer] = useState([])
+    const [listaQuehacer, setListaQuehacer] = useState(()=>{
+        const valores = JSON.parse(localStorage.getItem("lista-quehaceres"))
+        return valores || []
+    })
     const [inputValue, setInputValue] = useState({
         contenido: "",
         completado: false
     })
+    useEffect(() => {
+        localStorage.setItem("lista-quehaceres", JSON.stringify(listaQuehacer))
+    }, [listaQuehacer])
+    
     function handleInputTextChange(e){
-        setInputValue({
+        const nuevaLista = {
             ...inputValue,
             [e.target.name]: e.target.value
-        })
+        }
+        setInputValue(nuevaLista)
     }
     function handleCheckboxChange(e, value){
-        setListaQuehacer(
-            listaQuehacer.map( quehacer => {
-                return quehacer === value ? {...quehacer, [e.target.name]: e.target.checked} : quehacer;
-            })
-        )
-        setInputValue({
-            ...inputValue,
-            [e.target.name]: e.target.checked
+        const nuevaLista = listaQuehacer.map( quehacer => {
+            return quehacer === value ? {...quehacer, [e.target.name]: e.target.checked} : quehacer;
         })
+        setListaQuehacer(nuevaLista)
     }
     function handleOnSubmit(e){
         e.preventDefault()
-        setInputValue({
-            contenido: "",
-            completado: false
-        })
-        setListaQuehacer([
+        const nuevaLista = [
             ...listaQuehacer,
             inputValue
-        ])
+        ]
+        const nuevaTarea = {
+            contenido: "",
+            completado: false
+        }
+        setInputValue(nuevaTarea)
+        setListaQuehacer(nuevaLista)
     }
     function handleEliminar(e, value){
-        setListaQuehacer(listaQuehacer.filter( quehacer => quehacer !== value))
+        const nuevaLista = listaQuehacer.filter( quehacer => quehacer !== value )
+        setListaQuehacer(nuevaLista)
     }
     return (
         <form onSubmit={handleOnSubmit}>
