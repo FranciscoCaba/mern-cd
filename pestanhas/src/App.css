@@ -1,0 +1,25 @@
+.App {
+  text-align: center;
+}
+
+.colored {
+  padding: 1vh 2vw;
+  font-size: 16px;
+  color: white;
+  background-color: black;
+  transition: background-color 1s, color 1s, padding 0.5s, font-size 1s;
+}
+
+button {
+  background-color: white;
+  border: 1px solid lightgray;
+  padding: 0.5vh 1vw;
+  margin: 1vh 0.5vw 0 0.5vw;
+  transition: background-color 0.5s, padding 0.5s;
+}
+
+textarea {
+  margin-top: 1vh;
+  background-color: white;
+  transition: all 5s;
+}
