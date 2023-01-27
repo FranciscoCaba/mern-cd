@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost/name_of_your_DB", {
+mongoose.connect("mongodb://127.0.0.1:27017/practica_mongoose", {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 })
