@@ -7,4 +7,4 @@ const ChisteSchema = new mongoose.Schema({
 
 const Chiste = mongoose.model("Chiste",ChisteSchema)
 
-module.exports(Chiste)
+module.exports = Chiste
