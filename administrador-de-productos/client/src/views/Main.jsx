@@ -19,7 +19,10 @@ const Main = () => {
     const crearProducto = (producto) => {
         axios.post("http://localhost:8000/api/productos/new", producto)
             .then( res => {
-                setProductos([...productos, res.data])
+                if(!res.data.error)
+                    setProductos([...productos, res.data])
+                else
+                    alert("Favor complete todos los campos")
             })
             .catch( err => console.log(err))
     }
