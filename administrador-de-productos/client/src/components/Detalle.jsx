@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { NavLink, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import BotonEliminar from './BotonEliminar'
 
 const Detalle = () => {
     const [producto, setProducto] = useState({})
@@ -17,13 +18,6 @@ const Detalle = () => {
             })
     }, [id])
 
-    const eliminarProducto = (id) => {
-        axios.delete("http://localhost:8000/api/productos/"+id)
-            .then( res => {
-                navigate("/")
-            })
-    }
-
     const printInfo = (values) => {
         return (
             <div className='info-container'>
@@ -31,7 +25,7 @@ const Detalle = () => {
                 <p className='product-info'>Price: {values[2]}</p>
                 <p className='product-info'>Description: {values[3]}</p>
                 <NavLink to={'/'+values[0]+'/edit'}>Edit</NavLink>
-                <button onClick={ e => eliminarProducto(producto._id) }>Delete</button>
+                <BotonEliminar idProducto={values[0]} successCallback={() => navigate("/")} />
             </div>
         )
     }
