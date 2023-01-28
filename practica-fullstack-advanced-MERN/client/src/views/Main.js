@@ -16,13 +16,18 @@ const Main = () => {
             .catch( err => console.log(err))
     }, [])
 
+    const createPerson = (person) => {
+        axios.post("http://localhost:8000/api/people", person)
+            .then( res => setPeople([...people, res.data]) )
+    }
+
     const removeFromDom = personId => {
         setPeople(people.filter(person => person._id !== personId));
     }
     
     return (
         <>
-            <PersonForm />
+            <PersonForm onSubmitProp = {createPerson} initialFirstName = "" initialLastName = ""/>
             { loaded && <PersonList people={people} removeFromDom={removeFromDom}/>}
         </>
     )
