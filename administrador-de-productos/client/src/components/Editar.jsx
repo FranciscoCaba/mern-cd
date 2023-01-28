@@ -1,50 +1,39 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import ProductoForm from './ProductoForm'
 
 const Editar = () => {
-    const [title, setTitle] = useState("")
-    const [price, setPrice] = useState("")
-    const [description, setDescription] = useState("")
+    const [producto, setProducto] = useState([])
+    const [cargado, setCargado] = useState(false)
     const { id } = useParams()
 
     useEffect(() => {
         axios.get("http://localhost:8000/api/productos/"+id)
             .then( res => {
-                setTitle(res.data.title)
-                setPrice(res.data.price)
-                setDescription(res.data.description)
+                setProducto(res.data)
+                setCargado(true)
             })
     }, [id])
     
-    const actualizarProducto = (e) => {
-        e.preventDefault()
-        axios.put("http://localhost:8000/api/productos/"+id, {
-            title,
-            price,
-            description
-        })
-            .then( res => console.log(res))
+    const actualizarProducto = (producto) => {
+        axios.put("http://localhost:8000/api/productos/"+id, producto)
+            .then( res => console.log(res.data))
     }
 
     return (
         <div>
             <h1>Update Product</h1>
-            <form onSubmit={actualizarProducto}>
-                <p className='form-p'>
-                    <label>Title</label>
-                    <input type="text" value={title} onChange={ e => setTitle(e.target.value) }/>
-                </p>
-                <p className='form-p'>
-                    <label>Price</label>
-                    <input type="text" value={price} onChange={ e => setPrice(e.target.value) }/>
-                </p>
-                <p className='form-p'>
-                    <label>Description</label>
-                    <input type="text" value={description} onChange={ e => setDescription(e.target.value) }/>
-                </p>
-                <button type='submit'>Update</button>
-            </form>
+            {
+                cargado && (
+                    <ProductoForm
+                        initialTitle={producto.title}
+                        initialPrice={producto.price}
+                        initialDescription={producto.description}
+                        onSubmitProp={actualizarProducto}
+                    />
+                )
+            }
         </div>
     )
 }
