@@ -20,5 +20,15 @@ module.exports = {
         Producto.findOne({ _id: req.params.id })
             .then(producto => res.json(producto))
             .catch( err => res.json({message: "Ha ocurrido un error.", error: err}))
+    },
+    updateProduct: (req,res) => {
+        Producto.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
+            .then(productoEditado => res.json(productoEditado))
+            .catch( err => res.json({message: "Ha ocurrido un error.", error: err}))
+    },
+    deleteProduct: (req,res) => {
+        Producto.findOneAndRemove({ _id: req.params.id })
+            .then(producto => res.json(producto))
+            .catch( err => res.json({message: "Ha ocurrido un error.", error: err}))
     }
 }
