@@ -11,6 +11,6 @@ const AutorSchema = new mongoose.Schema({
         required: [true, "The last name is required"],
         minlength: [3, "The last name must be at least 3 characters long"]
     }
-})
+},{ timestamps: true })
 
 module.exports = mongoose.model("Autor", AutorSchema)
