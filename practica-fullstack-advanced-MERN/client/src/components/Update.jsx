@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import PersonForm from './PersonForm'
+import DeleteButton from './DeleteButton'
 
-const Update = () => {
+const Update = (props) => {
     const { id } = useParams()
     const [person, setPerson] = useState([])
     const [loaded, setLoaded] = useState(false)
+    const navigate = useNavigate()
 
     useEffect(() => {
         axios.get("http://localhost:8000/api/people/"+id)
@@ -26,11 +28,14 @@ const Update = () => {
             <h1>Update a Person</h1>
             {
                 loaded && (
-                    <PersonForm
-                        onSubmitProp={updatePerson}
-                        initialFirstName={person.firstName}
-                        initialLastName={person.lastName}
-                    />
+                    <>
+                        <PersonForm
+                            onSubmitProp={updatePerson}
+                            initialFirstName={person.firstName}
+                            initialLastName={person.lastName}
+                        />
+                        <DeleteButton personId={id} successCallback={()=>navigate('/people')} />
+                    </>
                 )
             }
         </div>
