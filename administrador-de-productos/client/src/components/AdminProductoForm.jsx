@@ -21,15 +21,15 @@ const AdminProductoForm = () => {
             <h1>Product Manager</h1>
             <form onSubmit={onSubmitHandler}>
                 <p>
-                    <label>Title:</label>
+                    <label>Title</label>
                     <input type="text" onChange={ e => setTitle(e.target.value) }/>
                 </p>
                 <p>
-                    <label>Price:</label>
+                    <label>Price</label>
                     <input type="number" onChange={ e => setPrice(e.target.value) }/>
                 </p>
                 <p>
-                    <label>Description:</label>
+                    <label>Description</label>
                     <input type="text" onChange={ e => setDescription(e.target.value) }/>
                 </p>
                 <button type='submit'>Create</button>
