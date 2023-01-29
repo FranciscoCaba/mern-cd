@@ -12,7 +12,7 @@ module.exports = {
             .catch( err => res.status(400).json(err))
     },
     updateAuthor: (req,res) => {
-        Autor.findOneAndUpdate( {_id: req.params.id }, req.body, { new: true } )
+        Autor.findOneAndUpdate( {_id: req.params.id }, req.body, { runValidators: true, new: true } )
             .then( autorEditado => res.json(autorEditado) )
             .catch( err => res.status(400).json(err))
     },
